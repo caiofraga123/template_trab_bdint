@@ -5,8 +5,9 @@ Trabalho desenvolvido durante a disciplina de Banco de dados
 
 ### 1. COMPONENTES<br>
 Integrantes do grupo<br>
-Penis Penis:penispenis@gmail.com<br>
-segundo_componente_do_grupo:email_segundo_componente@dominio.com<br>
+Caio Fraga: caiofcintra@gmail.com<br> 
+Ricardo Leite: ricardoleiterodriguesbe@gmail.com<br>
+Paulo Victor: paulovictoralves.contato@gmail.com<br>
 ...<br>
 
 ### 2.INTRODUÇÃO E MOTIVAÇÃO<br>
