@@ -73,16 +73,118 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
    ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/logico.jpeg)
  
 ### 7	MODELO FÍSICO<br>
-        a) inclusão das instruções de criacão das estruturas em SQL/DDL 
-        (criação de tabelas, alterações, etc..) 
+        drop table if exists pessoa, alimentos, pedidos, pedidos_alimentos, empregado, entregador cascade;
+
+        create table pessoa (
+         uf varchar(2),
+         localidade varchar(50),
+         tipo_logradouro varchar(50),
+         logradouro varchar(50),
+         num integer,
+         complemento varchar(100),
+         ddd_num integer,
+         telefone integer,
+         nome varchar(100),
+         codigo integer primary key,
+         rg integer
+        );
+
+        create table alimentos(
+         codigo integer primary key,
+         nome varchar(100),
+         valor float
+        );
+
+        create table pedidos(
+         cod_pedido integer primary key,
+         fk_PESSOA_codigo integer references pessoa(codigo),
+         data_hora_pedido timestamp
+        );
+
+        create table pedidos_alimentos(
+         fk_PEDIDOS_codigo_pedido integer references pedidos(cod_pedido),
+         fk_ALIMENTOS_codigo integer references alimentos(codigo),
+         qtd integer
+        );
+
+        create table empregado(
+         fk_PESSOA_codigo integer,
+         salario float
+        );
+
+        create table entregador(
+         tipo_vei varchar(10),
+         placa varchar(7),
+         comissao float,
+         fk_EMPREGADO_fk_PESSOA_codigo integer,
+         fk_PEDIDOS_cod_pedido integer,
+         data_hora_entrega timestamp
+        );
         
        
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-        a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico
-        (Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
-        b) Criar um novo banco de dados para testar a restauracao 
-        (em caso de falha na restauração o grupo não pontuará neste quesito)
-        c) formato .SQL
+    insert into pessoa(uf, localidade, tipo_logradouro, logradouro, num, complemento, ddd_num, telefone, nome, codigo, rg)
+    values
+    ('ES', 'Cachoeirinha de Itaúna', 'Aeroporto', 'Casa', 120, 'Proximo ao Aeroporto Golfinho Dalta', 27, 966952413, 'Moisés Savedra Omena', 10, 2756844),
+    ('ES', 'Serra', 'Alameda', 'Apartamento', 235, 'Próximo ao Atacado Vem', 27, 978625341, 'Pedro Antônio Barcelos de Oliveira', 20, 3874627),
+    ('ES', 'Água Doce do Norte', 'Ponte', 'Apartamento', 50, 'Em frente ao Bar do Jorge', 27, 908743627, 'Halisson Julio Lopes Pereira', 30, 3982754),
+    ('ES', 'Barra de São Francisco', 'Avenida', 'Casa', 413, 'À direita do semáforo na frente da Águia Branca', 27, 917284036, 'Gustavo Alves Caetano', 40, 3902094),
+    ('ES', 'Cariacica', 'Rua', 'Casa', 60, 'Ao lado ao Parque Santa Bárbara', 27, 927833513, 'Rafael Barbosa Martins', 50, 3895123),
+    ('ES', 'Colatina', 'Avenida', 'Casa', 313, 'Próximo à Rodoviária', 27, 904734332, 'Caio Fraga Coelho Cintra', 60, 3413895),
+    ('ES', 'Baixo Guandú', 'Viaduto', 'Apartamento', 380, 'Ao lado à linha do trem', 27, 900813324, 'Ricardo Leite Rodrigues', 70, 9934313),
+    ('ES', 'Fundão', 'Praça', 'Apartamento', 371, 'Em cima do Skinas Bar', 27, 988974993, 'Fellipy Silva Pereira', 80, 4787731);
+
+    insert into alimentos(codigo, nome, valor)
+    values
+    (1, 'Sanduíche de peito de peru com cream cheese, alface, tomate e frango desfiado', 7.00),
+    (2, 'Sanduíche de carne vegana com rúcula, berinjela, abobrinha, champígnon e pão sírio', 12.00),
+    (3, 'Marmita de arroz, feijão tropeiro, batata frita e bife bovino ao molho inglês', 16.50),
+    (4, 'Marmita de macarrão, arroz, feijão, aipim frito e peito de frango empanado', 18.00),
+    (5, 'Marmita de arroz integral, macarrão, filé de tilápia, ovos de codorna e mini-pastel de carne', 25.00),
+    (6, 'Espetinho de carne bovina e suína ao molho branco e farofa yoki', 5.00),
+    (7, 'Coxas de frango assada com páprica', 20.00),
+    (8, 'Postas de salmão ao molho de maracujá', 37.00),
+    (9, 'Batida de frutas tropicais com leite condensado e uma dose de uisque', 11.00),
+    (10, 'Frango assado com pimenta do reino, páprica picante, chimichurri e molho de alho', 30.00),
+    (12, 'Marmita com lasanha de carne, arroz, feijão fradinho e purê', 25.00),
+    (13, 'Marmita com feijoada, arroz, farofa, alface, tomate e pepino', 27.00),
+    (14, 'Marmita com strogonoff de frango, baião de dois, tutu de feijão, ', 23.00),
+    (15, 'Hamburguer de bife bovino, cebola, alface, queijo e bacon', 21.00),
+    (16, 'Porção de batata frita com páprica picante', 31.00),
+    (17, 'Porção de aipim frito', 26.00),
+    (18, 'Bolo de pote sabor napolitano', 14.00),
+    (19, 'Bolo de pote sabor chocolate', 13.00),
+    (20, 'Marmita com empadão, arroz, feijão e farofa de bacon', 21.00);
+
+    insert into pedidos(cod_pedido, FK_PESSOA_codigo, data_hora_pedido)
+    values
+    (1, 40, '2022-10-28 17:30'),
+    (2, 50, '2022-10-28 18:30'),
+    (3, 60, '2022-10-28 19:00'),
+    (4, 70, '2022-10-28 19:13'),
+    (5, 80, '2022-10-28 19:21');
+
+    insert into pedidos_alimentos(fk_PEDIDOS_codigo_pedido, fk_ALIMENTOS_codigo, qtd)
+    values
+    (1, 20, 1),
+    (2, 16, 2),
+    (3, 15, 3),
+    (4, 18, 4),
+    (5, 8, 1);
+
+    insert into empregado(salario, fk_PESSOA_codigo)
+    values
+    (2113.60, 20),
+    (2143.30, 30),
+    (2310.80, 10);
+
+    insert into entregador(tipo_vei, placa, comissao, fk_EMPREGADO_FK_PESSOA_codigo, FK_PEDIDOS_cod_pedido, data_hora_entrega)
+    values
+    ('Moto', 'MSP1963', 0.50, 20, 1, '2022-10-28 18:21'),
+    ('Moto', 'MSP1963', 1.00, 10, 2, '2022-10-28 19:11'),
+    ('Carro', 'TMJ1571', 2.10, 10, 3, '2022-10-28 19:41'),
+    ('Moto', 'MSP1963', 1.50, 20, 4, '2022-10-28 19:43'),
+    ('Carro', 'TMJ1571', 1.00, 20, 5, '2022-10-28 19:51');
 
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
