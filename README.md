@@ -28,9 +28,6 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 > O sistema proposto para a "DevImperato" conterá as informacões aqui detalhadas. Das Pessoas serão armazenados o código, ddd do número, telefone e nome. Um Endereço pertencerá a essa pessoa, contendo uf, localidade, tipo_logradouro, num, complemento. Uma pessoa pode ter apenas um endereço e um endereço pode pertencer à apenas uma pessoa. As Pessoas poderão ser Empregados com salario, e os Empregados poderão ser Entregadores, com comissão, tipo do veículo e placa. As Pessoas farão Pedidos, que terão serão armazenados o código do pedido e a data e a hora em que o pedido foi realizado. Um pedido pode ser feito por apenas uma pessoa, enquanto uma pessoa pode realizar vários pedidos. Pedidos são compostos por Alimentos, que tem código, nome e valor. Um pedido pode ter um ou vários alimentos, enquanto um alimento pode fazer parte de um ou vários pedidos. Os Pedidos são entregaues por Entregador, sendo que um Entregador pode entregar um ou vários Pedidos e um pedido pode ser entregue por apenas um Entregador.
 
 ### 4.PERGUNTAS A SEREM RESPONDIDAS E TABELA DE DADOS<br>
-#### 4.1 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
-    a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? 
-    b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
     
 > A Empresa DevImperato precisa inicialmente dos seguintes relatórios:
 * Relatório que mostre o nome dos clientes e qual alimento eles compraram.
