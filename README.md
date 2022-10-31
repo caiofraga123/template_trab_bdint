@@ -40,30 +40,54 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 * Relatório que mostre o valor total arrecadado da DevImperato.
 
  ### 5.MODELO CONCEITUAL<br>
-    A) Utilizar a Notação adequada (Preferencialmente utilizar o BR Modelo 3)
-    B) O mínimo de entidades do modelo conceitual pare este trabalho será igual a 5 e o Máximo 7.
-        * informe quais são as 3 principais entidades do sistema em densenvolvimento<br>(se houverem mais de 3 entidades, pense na importância da entidade para o sistema)       
-    C) Principais fluxos de informação/entidades do sistema (mínimo 3). <br>Dica: normalmente estes fluxos estão associados as tabelas que conterão maior quantidade de dados 
-    D) Qualidade e Clareza
-        Garantir que a semântica dos atributos seja clara no esquema (nomes coerentes com os dados).
-        Criar o esquema de forma a garantir a redução de informação redundante, possibilidade de valores null, 
-        e tuplas falsas (Aplicar os conceitos de normalização abordados).   
-        
+ 
 ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/conceitual.jpeg)
     
     
         
     
 #### 5.1 Validação do Modelo Conceitual
-    [Grupo01]: [Nomes dos que participaram na avaliação]
-    [Grupo02]: [Nomes dos que participaram na avaliação]
+    [Grupo01]: Gabriel de Paula Brunetti
+    [Grupo02]: Moisés Savedra Omena
+    [Grupo03]: Matheus Santos Nascimento
 
 #### 5.2 Descrição dos dados 
     [objeto]: [descrição do objeto]
     
     EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
+    ENDERECO: Tabela que armazena as informações relativas ao Endereço. <br>
+    uf: Campo que armazena o uf (unidade federativa) da pessoa. <br>
+    localidade: Campo que armazena a cidade onde a pessoa mora. <br>
+    tipo_logradouro: Campo que armazena o tipo de logradouro (Av, rua, alameda, etc).<br>
+    logradouro: Nome do local (Rua Florisbela Dias Corradi).<br>
+    num: Campo que armazena o numero do local onde a pessoa reside.<br>
+    complemento: Campo que armazena a descrição de onde a pessoa mora ex(perto da loterica).<br>
+ <br>
+ 
+    PESSOA: Tabela que armazena as informações relativas a Pessoa. <br>
+    codigo: Campo que armazena o codigo da pessoa. <br>
+    rg: Campo que armazena o rg da pessoa. <br>
+    nome: Campo que armazena o nome da pessoa. <br>
+    ddd_num: Campo que armazena o ddd do numero da pessoa. <br>
+    telefone: Campo que armazena o numero de celular da pessoa. <br>
+ <br>
+    EMPREGADO: Tabela que armazena as informações relativas a Empregado, herdando atributos de PESSOA. <br>
+    salario:  Campo que armazena o salario do empregado.<br>
+ <br>
+    ENTREGADOR: Tabela que armazena as informações relativas a Entregador, herdando atributos de EMPREGADO. <br>
+    comissao: Campo que armazena o valor da comissao ganha a cada entrega.<br>
+    tipo_vei: Campo que armazena o tipo do veiculo usado pelo entregador.<br>
+    placa: Campo que armazena a placa do veiculo.<br>
+ <br>
+    PEDIDOS: Tabela que armazena as informações relativas a Pedidos. <br>
+    data_hora: Campo que armazena a data e a hora que o pedido foi feito.<br>
+    cod_pedido: Campoq que armazena o codigo do pedido<br>
+ <br>
+    ALIMENTOS: Tabela que armazena as informações relativas a Alimentos.<br>
+    codigo: Campo que armazena o codigo do alimento.<br>
+    nome:  Campo que armazena o nome do alimento.<br>
+    valor: Campo que armazena o valor do alimento.<br>
+    <br>
 
 
 ### 6	MODELO LÓGICO<br>
