@@ -49,7 +49,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
         Criar o esquema de forma a garantir a redução de informação redundante, possibilidade de valores null, 
         e tuplas falsas (Aplicar os conceitos de normalização abordados).   
         
-![Alt text]https://github.com/caiofraga123/template_trab_bdint/blob/main/conceitual.jpeg
+![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/conceitual.jpeg)
     
     
         
