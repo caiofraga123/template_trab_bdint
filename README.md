@@ -45,8 +45,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     
 #### 5.1 Validação do Modelo Conceitual
     [Grupo01]: Gabriel de Paula Brunetti
-    [Grupo02]: Moisés Savedra Omena
-    [Grupo03]: Matheus Santos Nascimento
+    [Grupo02]: Matheus Santos Nascimento
 
 #### 5.2 Descrição dos dados 
     [objeto]: [descrição do objeto]
