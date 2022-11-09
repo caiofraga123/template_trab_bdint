@@ -41,8 +41,6 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/Modelo%20Conceitual%20DevImperato.jpeg)
     
     
-        
-    
 #### 5.1 Validação do Modelo Conceitual
     [Grupo01]: Gabriel de Paula Brunetti
     [Grupo02]: Matheus Santos Nascimento
@@ -51,17 +49,16 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
  <br>
     ENDERECO: Tabela que armazena as informações relativas ao Endereço. <br>
     uf: Campo que armazena o uf (unidade federativa) da pessoa. <br>
-    localidade: Campo que armazena a cidade onde a pessoa mora. <br>
-    tipo_logradouro: Campo que armazena o tipo de logradouro (Av, rua, alameda, etc).<br>
-    logradouro: Nome do local (Rua Florisbela Dias Corradi).<br>
+    cidade: Campo que armazena a cidade onde a pessoa reside. <br>
+    tipo_logradouro: Campo que armazena o tipo de logradouro, ex:(Av, rua, alameda, etc).<br>
+    logradouro: Nome do local, ex:(Rua Florisbela Dias Corradi).<br>
     num: Campo que armazena o numero do local onde a pessoa reside.<br>
-    complemento: Campo que armazena a descrição de onde a pessoa mora ex(perto da loterica).<br>
+    bairro: Campo que armazena o bairro que a pessoa reside.<br>
  <br>
     PESSOA: Tabela que armazena as informações relativas a Pessoa. <br>
     codigo: Campo que armazena o codigo da pessoa. <br>
     rg: Campo que armazena o rg da pessoa. <br>
     nome: Campo que armazena o nome da pessoa. <br>
-    ddd_num: Campo que armazena o ddd do numero da pessoa. <br>
     telefone: Campo que armazena o numero de celular da pessoa. <br>
  <br>
     EMPREGADO: Tabela que armazena as informações relativas a Empregado, herdando atributos de PESSOA. <br>
@@ -69,19 +66,21 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
  <br>
     ENTREGADOR: Tabela que armazena as informações relativas a Entregador, herdando atributos de EMPREGADO. <br>
     comissao: Campo que armazena o valor da comissao ganha a cada entrega.<br>
-    tipo_vei: Campo que armazena o tipo do veiculo usado pelo entregador.<br>
     placa: Campo que armazena a placa do veiculo.<br>
  <br>
+    VEICULO: Tabela que armazena as informações relativas ao veiculo usado pelo Entregador.<br>
+    codigo: Campo que armazena o codigo do veiculo.<br>
+    tipo_vei: Campo que armazena o tipo de veiculo usado pelo entregador.<br>
+<br>
     PEDIDOS: Tabela que armazena as informações relativas a Pedidos. <br>
-    data_hora: Campo que armazena a data e a hora que o pedido foi feito.<br>
-    cod_pedido: Campoq que armazena o codigo do pedido<br>
+    data_hora_pedido: Campo que armazena a data e a hora que o pedido foi feito.<br>
+    cod_pedido: Campo que armazena o codigo do pedido<br>
  <br>
     ALIMENTOS: Tabela que armazena as informações relativas a Alimentos.<br>
     codigo: Campo que armazena o codigo do alimento.<br>
     nome:  Campo que armazena o nome do alimento.<br>
     valor: Campo que armazena o valor do alimento.<br>
-    <br>
-
+<br>
 
 ### 6	MODELO LÓGICO<br>
         a) inclusão do esquema lógico do banco de dados
