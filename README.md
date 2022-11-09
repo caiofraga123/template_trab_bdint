@@ -48,7 +48,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     [Grupo02]: Matheus Santos Nascimento
 
 #### 5.2 Descrição dos dados 
- 
+ <br>
     ENDERECO: Tabela que armazena as informações relativas ao Endereço. <br>
     uf: Campo que armazena o uf (unidade federativa) da pessoa. <br>
     localidade: Campo que armazena a cidade onde a pessoa mora. <br>
