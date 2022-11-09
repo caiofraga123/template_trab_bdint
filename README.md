@@ -48,9 +48,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     [Grupo02]: Matheus Santos Nascimento
 
 #### 5.2 Descrição dos dados 
-    [objeto]: [descrição do objeto]
-    
-    EXEMPLO:
+ 
     ENDERECO: Tabela que armazena as informações relativas ao Endereço. <br>
     uf: Campo que armazena o uf (unidade federativa) da pessoa. <br>
     localidade: Campo que armazena a cidade onde a pessoa mora. <br>
@@ -59,7 +57,6 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     num: Campo que armazena o numero do local onde a pessoa reside.<br>
     complemento: Campo que armazena a descrição de onde a pessoa mora ex(perto da loterica).<br>
  <br>
- 
     PESSOA: Tabela que armazena as informações relativas a Pessoa. <br>
     codigo: Campo que armazena o codigo da pessoa. <br>
     rg: Campo que armazena o rg da pessoa. <br>
