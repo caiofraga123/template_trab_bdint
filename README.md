@@ -90,7 +90,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
         a) inclusão do esquema lógico do banco de dados
         b) verificação de correspondencia com o modelo conceitual 
         (não serão aceitos modelos que não estejam em conformidade)
-   ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/logico.jpeg)
+   ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/Modelo%20Logico%20DevImperato.jpeg)
  
 ### 7	MODELO FÍSICO<br>
         drop table if exists pessoa, alimentos, pedidos, pedidos_alimentos, empregado, entregador cascade;
