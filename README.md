@@ -90,66 +90,112 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
    ![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/Modelo%20Logico%20DevImperato.jpeg)
  
 ### 7	MODELO FÍSICO<br>
-        drop table if exists pessoa, alimentos, pedidos, pedidos_alimentos, empregado, entregador cascade;
+    drop table if exists pessoa, complemento, empregado, entregador, veiculo, pedidos, pedidos_alimentos, alimentos, atendimento cascade;
 
-        create table pessoa (
-         uf varchar(2),
-         localidade varchar(50),
-         tipo_logradouro varchar(50),
-         logradouro varchar(50),
-         num integer,
-         complemento varchar(100),
-         ddd_num integer,
-         telefone integer,
-         nome varchar(100),
-         codigo integer primary key,
-         rg integer
-        );
+    create table pessoa (
+     codigo integer,
+     rg integer,
+     nome varchar(100),
+     telefone integer,
+     uf varchar(2),
+     cidade varchar(50),
+     bairro varchar(60),
+     tipo_logradouro varchar(50),
+     logradouro varchar(50),
+     num integer,
+     primary key (codigo)
+    );
 
-        create table alimentos(
-         codigo integer primary key,
-         nome varchar(100),
-         valor float
-        );
+    create table veiculo (
+     codigo integer,
+     tipo_vei varchar(20),
+     primary key(codigo)
+    );
 
-        create table pedidos(
-         cod_pedido integer primary key,
-         fk_PESSOA_codigo integer references pessoa(codigo),
-         data_hora_pedido timestamp
-        );
+    create table empregado(
+     cod_empregado integer references pessoa(codigo),
+     salario float,
+     primary key(cod_empregado),
+     unique(cod_empregado)
+    );
 
-        create table pedidos_alimentos(
-         fk_PEDIDOS_codigo_pedido integer references pedidos(cod_pedido),
-         fk_ALIMENTOS_codigo integer references alimentos(codigo),
-         qtd integer
-        );
+    create table entregador(
+     cod_entregador integer references empregado(cod_empregado),
+     comissao float,
+     fk_veiculo_codigo integer references veiculo(codigo),
+     placa varchar(7),
+     primary key(cod_entregador)
+    );
 
-        create table empregado(
-         fk_PESSOA_codigo integer,
-         salario float
-        );
+    create table complemento (
+     fk_pessoa_codigo integer references pessoa(codigo),
+     descricao varchar(75)
+    );
 
-        create table entregador(
-         tipo_vei varchar(10),
-         placa varchar(7),
-         comissao float,
-         fk_EMPREGADO_fk_PESSOA_codigo integer,
-         fk_PEDIDOS_cod_pedido integer,
-         data_hora_entrega timestamp
-        );
-        
+    create table alimentos(
+     codigo integer primary key,
+     nome varchar(100),
+     valor float
+    );
+
+    create table pedidos(
+     cod_pedido integer,
+     fk_ENTREGADOR_codigo integer references entregador(cod_entregador),
+     data_hora_inicio timestamp,
+     data_hora_entrega timestamp,
+     primary key(cod_pedido),
+     unique(cod_pedido)
+    );
+
+    create table pedidos_alimentos(
+     fk_PEDIDOS_cod_pedido integer references pedidos(cod_pedido),
+     fk_ALIMENTOS_codigo integer references alimentos(codigo),
+     qtd integer
+    );
+
+    create table atendimento(
+     fk_PEDIDOS_cod_pedido integer references pedidos(cod_pedido),
+     fk_PESSOA_codigo integer references pessoa(codigo),
+     fk_EMPREGADO_codigo integer references empregado(cod_empregado)
+    );
+
        
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-    insert into pessoa(uf, localidade, tipo_logradouro, logradouro, num, complemento, ddd_num, telefone, nome, codigo, rg)
+
+    insert into pessoa(codigo, rg, nome, telefone, uf, cidade, bairro, tipo_logradouro, num)
     values
-    ('ES', 'Cachoeirinha de Itaúna', 'Aeroporto', 'Casa', 120, 'Proximo ao Aeroporto Golfinho Dalta', 27, 966952413, 'Moisés Savedra Omena', 10, 2756844),
-    ('ES', 'Serra', 'Alameda', 'Apartamento', 235, 'Próximo ao Atacado Vem', 27, 978625341, 'Pedro Antônio Barcelos de Oliveira', 20, 3874627),
-    ('ES', 'Água Doce do Norte', 'Ponte', 'Apartamento', 50, 'Em frente ao Bar do Jorge', 27, 908743627, 'Halisson Julio Lopes Pereira', 30, 3982754),
-    ('ES', 'Barra de São Francisco', 'Avenida', 'Casa', 413, 'À direita do semáforo na frente da Águia Branca', 27, 917284036, 'Gustavo Alves Caetano', 40, 3902094),
-    ('ES', 'Cariacica', 'Rua', 'Casa', 60, 'Ao lado ao Parque Santa Bárbara', 27, 927833513, 'Rafael Barbosa Martins', 50, 3895123),
-    ('ES', 'Colatina', 'Avenida', 'Casa', 313, 'Próximo à Rodoviária', 27, 904734332, 'Caio Fraga Coelho Cintra', 60, 3413895),
-    ('ES', 'Baixo Guandú', 'Viaduto', 'Apartamento', 380, 'Ao lado à linha do trem', 27, 900813324, 'Ricardo Leite Rodrigues', 70, 9934313),
-    ('ES', 'Fundão', 'Praça', 'Apartamento', 371, 'Em cima do Skinas Bar', 27, 988974993, 'Fellipy Silva Pereira', 80, 4787731);
+    (10, 2756844, 'Elizeu Faria Lima', 966952413, 'ES', 'Cachoeirinha de Itaúna', 'Cristovão Colombo', 'Aeroporto', 120),
+    (20, 3874627, 'Pedro Antônio Barcelos de Oliveira', 978625341, 'ES', 'Serra', 'Ribamar Limão', 'Alameda', 235),
+    (30, 3982754, 'Halisson Julio Lopes Pereira', 908743627, 'ES', 'Água Doce do Norte', 'Vila Nelita', 'Ponte', 50),
+    (40, 3902094, 'Gustavo Alves Caetano', 917284036, 'ES', 'Barra de São Francisco', 'Vila Pavão', 'Avenida', 413),
+    (50, 3895123, 'Rafael Barbosa Martins', 927833513, 'ES', 'Cariacica', 'Santa Bárbara','Rua', 60),
+    (60, 3413895, 'Caio Fraga Coelho Cintra', 904734332, 'ES', 'Colatina', 'Santa Terezinha' ,'Avenida', 313),
+    (70, 9934313, 'Ricardo Leite Rodrigues', 900813324, 'ES', 'Baixo Guandú', 'Cristo Rei', 'Viaduto', 380),
+    (80, 4787731, 'Fellipy Silva Pereira', 988974993, 'ES', 'Fundão', 'Frentinha', 'Praça', 371);
+
+    insert into veiculo(codigo, tipo_vei)
+    values
+    (1, 'Moto'),
+    (2, 'Carro'),
+    (3, 'Bicicleta');
+
+    insert into empregado(cod_empregado, salario)
+    values
+    (20, 2113.60),
+    (30, 2143.30),
+    (60, 2310.80);
+
+    insert into entregador(cod_entregador, comissao, fk_veiculo_codigo, placa)
+    values
+    (20, 47.90, 1, 'MSP1963'),
+    (30, 53.40, 2, 'TMJ1996');
+
+    insert into complemento(fk_pessoa_codigo, descricao)
+    values
+    (10, 'B20'),
+    (40, 'D45'),
+    (50, '67L'),
+    (70, '27B');
 
     insert into alimentos(codigo, nome, valor)
     values
@@ -173,13 +219,13 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     (19, 'Bolo de pote sabor chocolate', 13.00),
     (20, 'Marmita com empadão, arroz, feijão e farofa de bacon', 21.00);
 
-    insert into pedidos(cod_pedido, FK_PESSOA_codigo, data_hora_pedido)
+    insert into pedidos(cod_pedido, fk_entregador_codigo, data_hora_inicio, data_hora_entrega)
     values
-    (1, 40, '2022-10-28 17:30'),
-    (2, 50, '2022-10-28 18:30'),
-    (3, 60, '2022-10-28 19:00'),
-    (4, 70, '2022-10-28 19:13'),
-    (5, 80, '2022-10-28 19:21');
+    (1, 30, '2022-10-28 17:30', '2022-10-28 18:12'),
+    (2, 20, '2022-10-28 18:30', '2022-10-28 19:11'),
+    (3, 20, '2022-10-28 19:00', '2022-10-28 19:37'),
+    (4, 30, '2022-10-28 19:13', '2022-10-28 19:58'),
+    (5, 30, '2022-10-28 19:21', '2022-10-28 20:07');
 
     insert into pedidos_alimentos(fk_PEDIDOS_codigo_pedido, fk_ALIMENTOS_codigo, qtd)
     values
@@ -189,20 +235,13 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     (4, 18, 4),
     (5, 8, 1);
 
-    insert into empregado(salario, fk_PESSOA_codigo)
+    insert into atendimento(fk_PEDIDOS_cod_pedido, fk_PESSOA_codigo, fk_EMPREGADO_codigo)
     values
-    (2113.60, 20),
-    (2143.30, 30),
-    (2310.80, 10);
-
-    insert into entregador(tipo_vei, placa, comissao, fk_EMPREGADO_FK_PESSOA_codigo, FK_PEDIDOS_cod_pedido, data_hora_entrega)
-    values
-    ('Moto', 'MSP1963', 0.50, 20, 1, '2022-10-28 18:21'),
-    ('Moto', 'MSP1963', 1.00, 10, 2, '2022-10-28 19:11'),
-    ('Carro', 'TMJ1571', 2.10, 10, 3, '2022-10-28 19:41'),
-    ('Moto', 'MSP1963', 1.50, 20, 4, '2022-10-28 19:43'),
-    ('Carro', 'TMJ1571', 1.00, 20, 5, '2022-10-28 19:51');
-
+    (1, 70, 30),
+    (2, 40, 20),
+    (3, 10, 20),
+    (4, 70, 30),
+    (5, 80, 30);
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     https://colab.research.google.com/drive/1Ie0mZ6wyT8ukQDK-NIoOL3t9yJ44fnhV?usp=sharing<br>
