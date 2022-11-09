@@ -55,6 +55,10 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     num: Campo que armazena o numero do local onde a pessoa reside.<br>
     bairro: Campo que armazena o bairro que a pessoa reside.<br>
  <br>
+    COMPLEMENTO: Campo que armazena informações relativas ao Complemento do Endereco.<br>
+    codigo: Campo relativo ao codigo do complemento.<br>
+    descricao: Campo relativo a descrição do complemento.<br>
+ <br>
     PESSOA: Tabela que armazena as informações relativas a Pessoa. <br>
     codigo: Campo que armazena o codigo da pessoa. <br>
     rg: Campo que armazena o rg da pessoa. <br>
