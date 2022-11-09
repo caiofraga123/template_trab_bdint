@@ -38,7 +38,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
  ### 5.MODELO CONCEITUAL<br>
  
-![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/conceitual.jpeg)
+![Alt text](https://github.com/caiofraga123/template_trab_bdint/blob/main/Modelo%20Conceitual%20DevImperato.jpeg)
     
     
         
