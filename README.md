@@ -294,7 +294,24 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     a) Criar minimo 2 envolvendo algum tipo de junção
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-    a) Criar minimo 1 de cada tipo
+     SELECT empregado.cod_empregado, pessoa.nome, pedidos.cod_pedido
+     FROM pedidos
+     RIGHT OUTER JOIN empregado
+     ON (empregado.cod_empregado = pedidos.fk_entregador_codigo)
+     INNER JOIN pessoa
+     ON (empregado.cod_empregado = pessoa.codigo);
+
+     SELECT alimentos.codigo, alimentos.valor, pedidos_alimentos.fk_alimentos_codigo
+     FROM alimentos
+     LEFT OUTER JOIN pedidos_alimentos
+     ON (alimentos.codigo = pedidos_alimentos.fk_alimentos_codigo);
+
+     SELECT pessoa.codigo, entregador.cod_entregador, empregado.salario
+     FROM pessoa
+     FULL JOIN entregador
+     ON (pessoa.codigo = entregador.cod_entregador)
+     INNER JOIN empregado
+     ON (entregador.cod_entregador = empregado.cod_empregado);
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
