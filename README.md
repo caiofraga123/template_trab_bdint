@@ -253,6 +253,16 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 ># Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
+     SELECT codigo, nome FROM alimentos WHERE nome LIKE 'Marmita%';
+
+     SELECT codigo, nome, telefone FROM pessoa WHERE tipo_logradouro = 'Avenida';
+
+     SELECT cod_pedido, data_hora_entrega FROM pedidos WHERE fk_entregador_codigo = 20;
+
+     SELECT fk_pedidos_cod_pedido, fk_alimentos_codigo FROM pedidos_alimentos WHERE qtd >= 2;
+
+     SELECT cod_empregado FROM empregado WHERE salario < 2200;
+
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
     b) Criar no mínimo 3 consultas com operadores aritméticos 
