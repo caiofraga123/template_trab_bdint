@@ -273,8 +273,18 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-    a) Criar minimo 3 de exclusão
-    b) Criar minimo 3 de atualização
+     DELETE FROM alimentos WHERE valor > 35;
+
+     DELETE FROM empregado WHERE cod_empregado = 100;
+
+     DELETE FROM pessoa WHERE codigo = 100;
+
+
+     UPDATE empregado SET salario = 2257.80 WHERE cod_empregado = 90;
+
+     UPDATE alimentos SET valor = 26.50 WHERE codigo = 14;
+
+     UPDATE alimentos SET valor = 23.50 WHERE codigo = 20;
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
     a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
