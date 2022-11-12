@@ -270,8 +270,31 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
-    b) Criar uma consulta para cada tipo de função data apresentada.
+      select * from alimentos a 
+      where a.nome ilike 'Bolo%'
+      order by a.codigo asc 
+      
+      select p.nome from pessoa p 
+      where p.codigo in (select c.fk_pessoa_codigo  from complemento c) and p.nome ilike 'r%'
+      
+      select a.nome from alimentos a 
+      where a.nome like 'Porção%'
+      
+      select p.nome from pessoa p 
+      where p.nome like '%Rodrigues%'
+      order by p.nome
 
+      select p.cidade, count(p.cidade)  from pessoa p 
+      where p.cidade ilike 'c%'
+      group by p.cidade
+      order by p.cidade desc 
+     
+    b) Criar uma consulta para cada tipo de função data apresentada.
+    
+      select cast(p.data_hora_inicio as DATE), count(cast(p.data_hora_inicio as DATE)) as "Pedidos" from pedidos p  
+      group by cast(p.data_hora_inicio as DATE)
+      order by count(p.data_hora_inicio) desc 
+      
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
      DELETE FROM alimentos WHERE valor > 35;
 
@@ -292,6 +315,38 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
     a) Criar minimo 2 envolvendo algum tipo de junção
+       select cast(p.data_hora_inicio as DATE), count(cast(p.data_hora_inicio as DATE)) as "Pedidos" from pedidos p  
+       group by cast(p.data_hora_inicio as DATE)
+       order by count(p.data_hora_inicio) desc 
+
+       select p.nome as "Cliente que nunca pediram" from pessoa p 
+       where p.nome not in (select p.nome from empregado e 
+       inner join pessoa p
+       on(e.cod_empregado = p.codigo)
+       ) and p.nome not in (
+       select p.nome from empregado e
+       inner join atendimento a
+       on(p.codigo = a.fk_pessoa_codigo))
+       order by p.nome
+
+       select p.nome as "Cliente", al.nome as "Alimento", al.valor as "Valor pago" from pessoa p
+       inner join atendimento a
+       on(p.codigo = a.fk_pessoa_codigo)
+       inner join pedidos pe 
+       on(a.fk_pedidos_cod_pedido = pe.cod_pedido)
+       inner join pedidos_alimentos pa 
+       on(pe.cod_pedido = pa.fk_pedidos_cod_pedido)
+       inner join alimentos al 
+       on(al.codigo = pa.fk_alimentos_codigo)
+
+       select p.nome, e2.comissao +  e.salario as "Salario mensal", extract(month from p2.data_hora_entrega) as "Mês" from pessoa p  
+       inner join empregado e 
+       on(e.cod_empregado = p.codigo)
+       inner join entregador e2
+       on(e.cod_empregado = e2.cod_entregador)
+       inner join pedidos p2 
+       on(p2.fk_entregador_codigo = e2.cod_entregador)
+       group by p.nome, e2.comissao +  e.salario, extract(month from p2.data_hora_entrega)
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
      SELECT empregado.cod_empregado, pessoa.nome, pedidos.cod_pedido
@@ -319,7 +374,23 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
      a) Criar minimo 1 envolvendo GROUP BY
+     
+        select a.fk_pessoa_codigo, count(*) as "Qtd" from atendimento a   
+        where a.fk_pessoa_codigo in (select p.codigo from pessoa p where uf = 'ES')  
+        group by a.fk_pessoa_codigo
+        order by 2 desc
+        
      b) Criar minimo 1 envolvendo algum tipo de junção
+  
+        select p.nome as "Cliente que nunca pediram" from pessoa p 
+        where p.nome not in (select p.nome from empregado e 
+        inner join pessoa p
+        on(e.cod_empregado = p.codigo)
+        ) and p.nome not in (
+        select p.nome from empregado e
+        inner join atendimento a
+        on(p.codigo = a.fk_pessoa_codigo))
+        order by p.nome
 
 ># Marco de Entrega 02: Do item 9.2 até o ítem 9.10<br>
 
