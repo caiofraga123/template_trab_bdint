@@ -339,9 +339,81 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
      UPDATE alimentos SET valor = 23.50 WHERE codigo = 20;
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-    a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
-    b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
-
+    select pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro, alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
+                           inner join empregado
+                           on pessoa.codigo = empregado.cod_empregado
+                           inner join entregador 
+                           on empregado.cod_empregado = entregador.cod_entregador
+                           inner join veiculo
+                           on entregador.fk_veiculo_codigo = veiculo.codigo
+                           inner join complemento
+                           on pessoa.codigo = complemento.fk_pessoa_codigo
+                           inner join pedidos
+                           on entregador.cod_entregador = pedidos.fk_entregador_codigo
+                           inner join pedidos_alimentos
+                           on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
+                           inner join atendimento 
+                           on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
+                           inner join alimentos
+                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigoselect pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro,                                    alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
+                           inner join empregado
+                           on pessoa.codigo = empregado.cod_empregado
+                           inner join entregador 
+                           on empregado.cod_empregado = entregador.cod_entregador
+                           inner join veiculo
+                           on entregador.fk_veiculo_codigo = veiculo.codigo
+                           inner join complemento
+                           on pessoa.codigo = complemento.fk_pessoa_codigo
+                           inner join pedidos
+                           on entregador.cod_entregador = pedidos.fk_entregador_codigo
+                           inner join pedidos_alimentos
+                           on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
+                           inner join atendimento 
+                           on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
+                           inner join alimentos
+                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigo;
+ 
+   select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos from pessoa
+                            inner join atendimento
+                            on  pessoa.codigo = atendimento.fk_pessoa_codigo
+                            inner join pedidos
+                            on atendimento.fk_pedidos_cod_pedido = pedidos.cod_pedido
+                            inner join pedidos_alimentos 
+                            on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
+                            inner join alimentos
+                            on pedidos_alimentos.fk_pedidos_cod_pedido = alimentos.codigo;
+ 
+ select alimentos.nome as nome_alimentos,  pedidos_alimentos.qtd from alimentos
+                            inner join pedidos_alimentos
+                            on  alimentos.codigo = pedidos_alimentos.fk_alimentos_codigo;
+ 
+ elect pessoa.nome as cliente_que_mais_pedem, pedidos_alimentos.qtd from pessoa
+                            inner join atendimento
+                            on  pessoa.codigo = atendimento.fk_pessoa_codigo
+                            inner join pedidos
+                            on atendimento.fk_pedidos_cod_pedido = pedidos.cod_pedido
+                            inner join pedidos_alimentos 
+                            on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
+                            inner join alimentos
+                            on pedidos_alimentos.fk_pedidos_cod_pedido = alimentos.codigo
+                            order by qtd desc;
+ 
+ select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos,pedidos.data_hora_entrega - pedidos.data_hora_inicio as tempo_de_espera from pessoa
+                            inner join atendimento
+                            on  pessoa.codigo = atendimento.fk_pessoa_codigo
+                            inner join pedidos
+                            on atendimento.fk_pedidos_cod_pedido = pedidos.cod_pedido
+                            inner join pedidos_alimentos 
+                            on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
+                            inner join alimentos
+                            on pedidos_alimentos.fk_pedidos_cod_pedido = alimentos.codigo
+ 
+ select sum(valor) as total from alimentos
+                            inner join pedidos_alimentos 
+                            on alimentos.codigo = pedidos_alimentos.fk_alimentos_codigo
+                            inner join pedidos
+                            on pedidos_alimentos.fk_pedidos_cod_pedido = pedidos.cod_pedido;
+ 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
     a) Criar minimo 2 envolvendo algum tipo de junção
        select cast(p.data_hora_inicio as DATE), count(cast(p.data_hora_inicio as DATE)) as "Pedidos" from pedidos p  
