@@ -355,23 +355,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
                            inner join atendimento 
                            on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
                            inner join alimentos
-                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigoselect pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro,                                    alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
-                           inner join empregado
-                           on pessoa.codigo = empregado.cod_empregado
-                           inner join entregador 
-                           on empregado.cod_empregado = entregador.cod_entregador
-                           inner join veiculo
-                           on entregador.fk_veiculo_codigo = veiculo.codigo
-                           inner join complemento
-                           on pessoa.codigo = complemento.fk_pessoa_codigo
-                           inner join pedidos
-                           on entregador.cod_entregador = pedidos.fk_entregador_codigo
-                           inner join pedidos_alimentos
-                           on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
-                           inner join atendimento 
-                           on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
-                           inner join alimentos
-                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigo;
+                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigos;
  
    select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos from pessoa
                             inner join atendimento
