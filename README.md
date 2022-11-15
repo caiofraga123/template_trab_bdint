@@ -263,10 +263,39 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
      SELECT cod_empregado FROM empregado WHERE salario < 2200;
 
-#### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-    a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
-    b) Criar no mínimo 3 consultas com operadores aritméticos 
-    c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
+#### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11) <br>
+    select fk_pedidos_cod_pedido as cod_do_pedido, fk_alimentos_codigo as cod_do_alimento from pedidos_alimentos;
+    
+    select cod_entregador as cod_do_entregador, comissao, fk_veiculo_codigo as cod_do_veiculo, placa from entregador;
+    
+    select cod_pedido, fk_entregador_codigo as cod_do_entregador, data_hora_inicio as horario_do_pedido, data_hora_entrega as horario_da_entrega
+    from pedidos;
+    
+    select  a.nome ,data_hora_entrega - data_hora_inicio as "Tempo de espera"from pedidos p 
+                            inner join pedidos_alimentos pa 
+                            on(pa.fk_pedidos_cod_pedido = p.cod_pedido)
+                            inner join alimentos a 
+                            on(a.codigo = pa.fk_alimentos_codigo);
+    
+    select empregado.salario, empregado.salario + (entregador.comissao * count(pedidos.fk_entregador_codigo)) as salario_comissao from empregado
+                            inner join entregador
+                            on empregado.cod_empregado = entregador.cod_entregador
+                            inner join pedidos
+                            on entregador.cod_entregador = pedidos.fk_entregador_codigo
+                            group by empregado.salario, entregador.comissao;
+                            
+                            
+    select salario, salario - (salario * 0.1) as salario_menos_10_porcento from empregado;
+    
+    select valor from alimentos where valor > 5 and valor < 15;
+    
+    select valor from alimentos where valor is not null;
+    
+    select valor from alimentos where valor > 22 or valor < 10;
+    
+    select qtd from pedidos_alimentos where qtd > 1 and qtd < 5 ;
+                           
+    select cod_pedido from pedidos where cod_pedido > 2 and cod_pedido < 10;    
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
