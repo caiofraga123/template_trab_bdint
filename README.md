@@ -247,7 +247,8 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
     (5, 80, 30);
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-    https://colab.research.google.com/drive/1Ie0mZ6wyT8ukQDK-NIoOL3t9yJ44fnhV?usp=sharing<br>
+    https://colab.research.google.com/drive/1Ie0mZ6wyT8ukQDK-NIoOL3t9yJ44fnhV?usp=sharing
+    
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
 
 ># Marco de Entrega 01: Do item 1 até o item 9.1<br>
