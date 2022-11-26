@@ -340,7 +340,9 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
      UPDATE alimentos SET valor = 23.50 WHERE codigo = 20;
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-    select pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro, alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
+
+    select pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro, 
+    alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
                            inner join empregado
                            on pessoa.codigo = empregado.cod_empregado
                            inner join entregador 
@@ -372,7 +374,7 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
                             inner join pedidos_alimentos
                             on  alimentos.codigo = pedidos_alimentos.fk_alimentos_codigo;
  
- elect pessoa.nome as cliente_que_mais_pedem, pedidos_alimentos.qtd from pessoa
+ select pessoa.nome as cliente_que_mais_pedem, pedidos_alimentos.qtd from pessoa
                             inner join atendimento
                             on  pessoa.codigo = atendimento.fk_pessoa_codigo
                             inner join pedidos
