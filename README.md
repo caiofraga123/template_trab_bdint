@@ -327,11 +327,10 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
       
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
      DELETE FROM alimentos WHERE valor > 35;
-
+ 
      DELETE FROM empregado WHERE cod_empregado = 100;
 
      DELETE FROM pessoa WHERE codigo = 100;
-
 
      UPDATE empregado SET salario = 2257.80 WHERE cod_empregado = 90;
 
@@ -385,7 +384,8 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
                             on pedidos_alimentos.fk_pedidos_cod_pedido = alimentos.codigo
                             order by qtd desc;
  
- select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos,pedidos.data_hora_entrega - pedidos.data_hora_inicio as tempo_de_espera from pessoa
+ select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos,
+ pedidos.data_hora_entrega - pedidos.data_hora_inicio as tempo_de_espera from pessoa
                             inner join atendimento
                             on  pessoa.codigo = atendimento.fk_pessoa_codigo
                             inner join pedidos
