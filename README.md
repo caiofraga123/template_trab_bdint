@@ -340,24 +340,25 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
 
-    select pessoa.nome, pessoa.cidade, pessoa.bairro, pessoa.tipo_logradouro, 
-    alimentos.nome as nome_alimento, veiculo.tipo_vei, complemento.descricao from pessoa
-                           inner join empregado
-                           on pessoa.codigo = empregado.cod_empregado
-                           inner join entregador 
-                           on empregado.cod_empregado = entregador.cod_entregador
-                           inner join veiculo
-                           on entregador.fk_veiculo_codigo = veiculo.codigo
-                           inner join complemento
-                           on pessoa.codigo = complemento.fk_pessoa_codigo
-                           inner join pedidos
-                           on entregador.cod_entregador = pedidos.fk_entregador_codigo
-                           inner join pedidos_alimentos
-                           on pedidos.cod_pedido = pedidos_alimentos.fk_pedidos_cod_pedido
-                           inner join atendimento 
-                           on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
-                           inner join alimentos
-                           on pedidos_alimentos.fk_alimentos_codigo = alimentos.codigos;
+   select pessoa.nome, pessoa.cidade, pessoa.bairro, 
+                            pessoa.tipo_logradouro, alimentos.nome as nome_alimento, 
+                            veiculo.tipo_vei, complemento.descricao from pedidos
+                            inner join pedidos_alimentos
+                            on pedidos.cod_pedido = pedidos_alimentos.fk_PEDIDOS_cod_pedido
+                            inner join alimentos 
+                            on pedidos_alimentos.fk_PEDIDOS_cod_pedido = alimentos.codigo
+                            inner join entregador
+                            on pedidos.fk_entregador_codigo = entregador.cod_entregador
+                            inner join veiculo
+                            on entregador.fk_veiculo_codigo = veiculo.codigo
+                            inner join atendimento
+                            on pedidos.cod_pedido = atendimento.fk_pedidos_cod_pedido
+                            inner join empregado
+                            on entregador.cod_entregador = empregado.cod_empregado
+                            inner join pessoa
+                            on empregado.cod_empregado = pessoa.codigo
+                            inner join complemento
+                            on pessoa.codigo = complemento.fk_pessoa_codigo
  
    select pessoa.nome as nome_pessoa,  alimentos.nome as nome_alimentos from pessoa
                             inner join atendimento
@@ -457,8 +458,29 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
      ON (entregador.cod_entregador = empregado.cod_empregado);
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-        a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
-        b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
+        a) Não foi possível devido à falta de auto relacionamento.
+           
+           create view nomes_dos_empregados as
+           select pessoa.nome as empregados
+           from pessoa inner join empregado
+           on pessoa.codigo = empregado.cod_empregado;
+           select * from nomes_dos_empregados;
+ 
+        b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho.
+           
+           create view salario_anual as
+           (select cod_empregado, salario , salario*12 as salario_anual from empregado)
+           select * from salario_anual;
+ 
+           create view media_qntd as
+           select fk_alimentos_codigo, avg(pedidos_alimentos.qtd) as quantidade_media from pedidos_alimentos
+           group by fk_alimentos_codigo;
+           select * from media_qntd;
+ 
+           create view salario_max_mini 
+           as select max(alimentos.valor) as maximo, 
+           min(alimentos.valor) as minimo from alimentos;
+           select * from salario_max_mini;
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
      a) Criar minimo 1 envolvendo GROUP BY
