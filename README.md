@@ -95,72 +95,166 @@ gerenciar, atualizar, e que descrevem a proposta/solução a ser desenvolvida.
 ### 7	MODELO FÍSICO<br>
     drop table if exists pessoa, complemento, empregado, entregador, veiculo, pedidos, pedidos_alimentos, alimentos, atendimento cascade;
 
-    create table pessoa (
-     codigo integer,
-     rg integer,
-     nome varchar(100),
-     telefone integer,
-     uf varchar(2),
-     cidade varchar(50),
-     bairro varchar(60),
-     tipo_logradouro varchar(50),
-     logradouro varchar(50),
-     num integer,
-     primary key (codigo)
-    );
+    CREATE TABLE USUARIO (
+    id SERIAL PRIMARY KEY,
+    foto_perfil VARCHAR (500),
+    nome VARCHAR (50),
+    email VARCHAR (50),
+    senha VARCHAR (50),
+    bio VARCHAR (500),
+    FK_TIPO_id SERIAL
+);
 
-    create table veiculo (
-     codigo integer,
-     tipo_vei varchar(20),
-     primary key(codigo)
-    );
+CREATE TABLE PESSOA (
+    FK_deficiencia_deficiencia_PK SERIAL,
+    FK_USUARIO_id SERIAL PRIMARY KEY
+);
 
-    create table empregado(
-     cod_empregado integer references pessoa(codigo),
-     salario float,
-     primary key(cod_empregado),
-     unique(cod_empregado)
-    );
+CREATE TABLE ESTABELECIMENTO (
+    FK_selo_selo_PK SERIAL,
+    horario_inicial DATE,
+    FK_tipo_estabelecimento_tipo_estabelecimento_PK SERIAL,
+    foto_banner VARCHAR (500),
+    latitude VARCHAR (50),
+    longitude VARCHAR (50),
+    FK_USUARIO_id SERIAL PRIMARY KEY
+);
 
-    create table entregador(
-     cod_entregador integer references empregado(cod_empregado),
-     comissao float,
-     fk_veiculo_codigo integer references veiculo(codigo),
-     placa varchar(7),
-     primary key(cod_entregador)
-    );
+CREATE TABLE TIPO_CONTATO (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR (50)
+);
 
-    create table complemento (
-     fk_pessoa_codigo integer references pessoa(codigo),
-     descricao varchar(75)
-    );
+CREATE TABLE TIPO (
+    id SERIAL PRIMARY KEY,
+    tipo VARCHAR (50)
+);
 
-    create table alimentos(
-     codigo integer primary key,
-     nome varchar(100),
-     valor float
-    );
+CREATE TABLE AVALIACAO (
+    nota FLOAT,
+    dt_avaliacao DATE,
+    FK_PESSOA_FK_USUARIO_id SERIAL,
+    FK_ESTABELECIMENTO_FK_USUARIO_id SERIAL
+);
 
-    create table pedidos(
-     cod_pedido integer,
-     fk_ENTREGADOR_codigo integer references entregador(cod_entregador),
-     data_hora_inicio timestamp,
-     data_hora_entrega timestamp,
-     primary key(cod_pedido),
-     unique(cod_pedido)
-    );
+CREATE TABLE VISITAS (
+    dt_visita DATE,
+    FK_PESSOA_FK_USUARIO_id SERIAL,
+    FK_ESTABELECIMENTO_FK_USUARIO_id SERIAL
+);
 
-    create table pedidos_alimentos(
-     fk_PEDIDOS_cod_pedido integer references pedidos(cod_pedido),
-     fk_ALIMENTOS_codigo integer references alimentos(codigo),
-     qtd integer
-    );
+CREATE TABLE COMENTARIOS (
+    descricao VARCHAR (500),
+    dt_comentario DATE,
+    FK_PESSOA_FK_USUARIO_id SERIAL,
+    FK_ESTABELECIMENTO_FK_USUARIO_id SERIAL
+);
 
-    create table atendimento(
-     fk_PEDIDOS_cod_pedido integer references pedidos(cod_pedido),
-     fk_PESSOA_codigo integer references pessoa(codigo),
-     fk_EMPREGADO_codigo integer references empregado(cod_empregado)
-    );
+CREATE TABLE deficiencia (
+    deficiencia_PK SERIAL NOT NULL PRIMARY KEY,
+    deficiencia VARCHAR (50)
+);
+
+CREATE TABLE selo (
+    selo_PK SERIAL NOT NULL PRIMARY KEY,
+    selo VARCHAR (50)
+);
+
+CREATE TABLE tipo_estabelecimento (
+    tipo_estabelecimento_PK SERIAL NOT NULL PRIMARY KEY,
+    tipo_estabelecimento SERIAL
+);
+
+CREATE TABLE Seguidor (
+    fk_USUARIO_id SERIAL,
+    fk_USUARIO_id_ SERIAL
+);
+
+CREATE TABLE Pertence (
+    fk_TIPO_CONTATO_id SERIAL,
+    fk_USUARIO_id SERIAL,
+    descricao VARCHAR (50)
+);
+ 
+ALTER TABLE USUARIO ADD CONSTRAINT FK_USUARIO_2
+    FOREIGN KEY (FK_TIPO_id)
+    REFERENCES TIPO (id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE PESSOA ADD CONSTRAINT FK_PESSOA_2
+    FOREIGN KEY (FK_deficiencia_deficiencia_PK)
+    REFERENCES deficiencia (deficiencia_PK)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE PESSOA ADD CONSTRAINT FK_PESSOA_3
+    FOREIGN KEY (FK_USUARIO_id)
+    REFERENCES USUARIO (id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE ESTABELECIMENTO ADD CONSTRAINT FK_ESTABELECIMENTO_2
+    FOREIGN KEY (FK_selo_selo_PK)
+    REFERENCES selo (selo_PK)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE ESTABELECIMENTO ADD CONSTRAINT FK_ESTABELECIMENTO_3
+    FOREIGN KEY (FK_tipo_estabelecimento_tipo_estabelecimento_PK)
+    REFERENCES tipo_estabelecimento (tipo_estabelecimento_PK)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE ESTABELECIMENTO ADD CONSTRAINT FK_ESTABELECIMENTO_4
+    FOREIGN KEY (FK_USUARIO_id)
+    REFERENCES USUARIO (id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE AVALIACAO ADD CONSTRAINT FK_AVALIACAO_1
+    FOREIGN KEY (FK_PESSOA_FK_USUARIO_id)
+    REFERENCES PESSOA (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE AVALIACAO ADD CONSTRAINT FK_AVALIACAO_2
+    FOREIGN KEY (FK_ESTABELECIMENTO_FK_USUARIO_id)
+    REFERENCES ESTABELECIMENTO (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE VISITAS ADD CONSTRAINT FK_VISITAS_1
+    FOREIGN KEY (FK_PESSOA_FK_USUARIO_id)
+    REFERENCES PESSOA (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE VISITAS ADD CONSTRAINT FK_VISITAS_2
+    FOREIGN KEY (FK_ESTABELECIMENTO_FK_USUARIO_id)
+    REFERENCES ESTABELECIMENTO (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE COMENTARIOS ADD CONSTRAINT FK_COMENTARIOS_1
+    FOREIGN KEY (FK_PESSOA_FK_USUARIO_id)
+    REFERENCES PESSOA (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE COMENTARIOS ADD CONSTRAINT FK_COMENTARIOS_2
+    FOREIGN KEY (FK_ESTABELECIMENTO_FK_USUARIO_id)
+    REFERENCES ESTABELECIMENTO (FK_USUARIO_id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Seguidor ADD CONSTRAINT FK_Seguidor_1
+    FOREIGN KEY (fk_USUARIO_id)
+    REFERENCES USUARIO (id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Seguidor ADD CONSTRAINT FK_Seguidor_2
+    FOREIGN KEY (fk_USUARIO_id_)
+    REFERENCES USUARIO (id)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Pertence ADD CONSTRAINT FK_Pertence_1
+    FOREIGN KEY (fk_TIPO_CONTATO_id)
+    REFERENCES TIPO_CONTATO (id)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE Pertence ADD CONSTRAINT FK_Pertence_2
+    FOREIGN KEY (fk_USUARIO_id)
+    REFERENCES USUARIO (id)
+    ON DELETE SET NULL;
 
        
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
